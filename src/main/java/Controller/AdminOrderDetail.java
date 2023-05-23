@@ -3,6 +3,7 @@ package Controller;
 import DTO.ProductOrderDTO;
 import Model.Order;
 import Model.Product;
+import Model.StatusOrder;
 import Services.OrderService;
 import Services.ProductOrderService;
 import Services.ProductService;
@@ -34,7 +35,6 @@ public class AdminOrderDetail extends HttpServlet {
         request.setAttribute("order", order);
 
         ArrayList<ProductOrderDTO> productOrders = this.productOrderService.getByOrderId(id);
-        System.out.print(productOrders + "Ádsadasd");
         productOrders.forEach(productOrderDTO -> {
             request.setAttribute("product" + productOrderDTO.getProductId(), productService.findById(productOrderDTO.getProductId(), Product.class));
         });
@@ -50,14 +50,14 @@ public class AdminOrderDetail extends HttpServlet {
 
         switch (action) {
             case "next": {
-                if (Integer.parseInt(status) < 2) {
+                if (Integer.parseInt(status) < StatusOrder.DONE.ordinal()) {
                     this.orderService.updateStatusOrder(id, Integer.parseInt(status) + 1);
                     response.sendRedirect("/admin/adminOrderDetail?id=" + id);
                 }
                 return;
             }
             case "back": {
-                if (Integer.parseInt(status) > 0) {
+                if (Integer.parseInt(status) > StatusOrder.ORDERED.ordinal()) {
                     this.orderService.updateStatusOrder(id, Integer.parseInt(status) - 1);
                     response.sendRedirect("/admin/adminOrderDetail?id=" + id);
                 }
