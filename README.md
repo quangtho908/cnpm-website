@@ -39,10 +39,11 @@ docker image ls
 ```
 Kết quả như sau
 ```
-REPOSITORY TAG IMAGE ID CREATED SIZE
-cnpm latest dc2db531fbd1 39 minutes ago 780MB
-Image đã được tạo thành công
+REPOSITORY    TAG       IMAGE ID        CREATED           SIZE
+cnpm          latest    dc2db531fbd1    39 minutes ago    780MB
 ```
+Image đã được tạo thành công
+
 **5. Run image này với port 8080.**
 Linux: 
 ```
